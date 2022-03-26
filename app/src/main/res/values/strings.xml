@@ -8,4 +8,16 @@
         <item>Calories Burned</item>
     </string-array>
     <string name="google_maps_key">AIzaSyC-6brbC3a05RfLcQyfg5OkfLTK5pMIeEo</string>
+
+    <!-- Running Fragment -->
+    <string name="running_sort_by">Sort by:</string>
+    <string name="statistics_total_distance_info">Total Distance</string>
+    <string name="statistics_total_distance">0km</string>
+    <string name="statistics_total_time_info">Total Time</string>
+    <string name="statistics_total_time">00:00:00</string>
+    <string name="statistics_total_calories_burned_info">Total Calories Burned</string>
+    <string name="statistics_total_calories">0kcal</string>
+    <string name="statistics_average_speed_info">Average Speed</string>
+    <string name="statistics_average_speed">0km/h</string>
+
 </resources>
