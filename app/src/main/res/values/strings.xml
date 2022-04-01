@@ -11,6 +11,8 @@
 
     <!-- Running Fragment -->
     <string name="running_sort_by">Sort by:</string>
+
+    <!-- Statistics Fragment -->
     <string name="statistics_total_distance_info">Total Distance</string>
     <string name="statistics_total_distance">0km</string>
     <string name="statistics_total_time_info">Total Time</string>
@@ -19,5 +21,26 @@
     <string name="statistics_total_calories">0kcal</string>
     <string name="statistics_average_speed_info">Average Speed</string>
     <string name="statistics_average_speed">0km/h</string>
+
+    <!-- Settings Fragment -->
+    <string name="settings_name">Your Name</string>
+
+    <!-- Tracking Fragment -->
+    <string name="tracking_timer">00:00:00:00</string>
+    <string name="tracking_start">Start</string>
+    <string name="tracking_finish">FINISH Run</string>
+    <string name="tracking_lets_go">Let\'s go, USERNAME!</string>
+
+    <!-- Setup Fragment -->
+    <string name="setup_welcome">Welcome!\nPlease enter your name and weight.</string>
+    <string name="setup_name">Your Name</string>
+    <string name="setup_weight">Your Weight</string>
+    <string name="setup_weight_value">kg</string>
+    <string name="setup_continue">Continue</string>
+
+    <!-- Bottom Navigation Menu -->
+    <string name="bot_nav_runs">Your Runs</string>
+    <string name="bot_nav_statistics">Statistics</string>
+    <string name="bot_nav_settings">Settings</string>
 
 </resources>
