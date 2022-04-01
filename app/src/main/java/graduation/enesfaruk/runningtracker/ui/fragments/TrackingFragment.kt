@@ -31,12 +31,12 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking) {
         }
         mapView.onCreate(savedInstanceState)
 
-        mapView.getMapAsync{
+        mapView.getMapAsync {
             map = it
         }
     }
 
-    private fun sendCommandToService(action: String){
+    private fun sendCommandToService(action: String) {
         Intent(requireContext(), TrackingService::class.java).also {
             it.action = action
             requireContext().startService(it)

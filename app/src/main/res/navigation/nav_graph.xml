@@ -4,10 +4,15 @@
     android:id="@+id/nav_graph.xml"
     app:startDestination="@id/setupFragment">
 
+    <action
+        android:id="@+id/action_global_trackingFragment"
+        app:destination="@+id/trackingFragment"
+        app:launchSingleTop="true" />
+
     <fragment
         android:id="@+id/runFragment"
         android:name="graduation.enesfaruk.runningtracker.ui.fragments.RunFragment"
-        android:label="RunFragment" >
+        android:label="RunFragment">
         <action
             android:id="@+id/action_runFragment_to_trackingFragment"
             app:destination="@id/trackingFragment" />
@@ -15,7 +20,7 @@
     <fragment
         android:id="@+id/setupFragment"
         android:name="graduation.enesfaruk.runningtracker.ui.fragments.SetupFragment"
-        android:label="SetupFragment" >
+        android:label="SetupFragment">
         <action
             android:id="@+id/action_setupFragment_to_runFragment"
             app:destination="@id/runFragment" />
@@ -31,7 +36,7 @@
     <fragment
         android:id="@+id/trackingFragment"
         android:name="graduation.enesfaruk.runningtracker.ui.fragments.TrackingFragment"
-        android:label="TrackingFragment" >
+        android:label="TrackingFragment">
         <action
             android:id="@+id/action_trackingFragment_to_runFragment"
             app:destination="@id/runFragment" />
