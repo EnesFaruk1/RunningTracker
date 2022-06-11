@@ -3,9 +3,6 @@ package graduation.enesfaruk.runningtracker.db
 import androidx.lifecycle.LiveData
 import androidx.room.*
 
-/**
- * Created by Enes Faruk Işık on 19.03.2022.
- */
 @Dao
 interface RunDAO {
 

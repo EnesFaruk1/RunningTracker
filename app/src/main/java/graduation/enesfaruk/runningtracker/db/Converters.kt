@@ -6,9 +6,6 @@ import androidx.room.TypeConverter
 import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
 
-/**
- * Created by Enes Faruk Işık on 19.03.2022.
- */
 class Converters {
 
     @TypeConverter

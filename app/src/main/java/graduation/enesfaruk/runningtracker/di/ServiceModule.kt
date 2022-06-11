@@ -15,10 +15,6 @@ import graduation.enesfaruk.runningtracker.R
 import graduation.enesfaruk.runningtracker.other.Constants
 import graduation.enesfaruk.runningtracker.ui.MainActivity
 
-/**
- * Created by Enes Faruk Işık on 4.06.2022.
- */
-
 @Module
 @InstallIn(ServiceComponent::class)
 object ServiceModule {

@@ -10,9 +10,6 @@ import kotlinx.android.synthetic.main.marker_view.view.*
 import java.text.SimpleDateFormat
 import java.util.*
 
-/**
- * Created by Enes Faruk Işık on 11.06.2022.
- */
 class CustomMarkerView(
     val runs: List<Run>,
     c: Context,

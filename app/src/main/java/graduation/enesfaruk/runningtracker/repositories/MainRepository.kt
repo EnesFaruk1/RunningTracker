@@ -4,9 +4,6 @@ import graduation.enesfaruk.runningtracker.db.Run
 import graduation.enesfaruk.runningtracker.db.RunDAO
 import javax.inject.Inject
 
-/**
- * Created by Enes Faruk Işık on 26.03.2022.
- */
 class MainRepository @Inject constructor(
     val runDAO: RunDAO
 ) {

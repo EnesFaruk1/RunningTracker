@@ -6,9 +6,6 @@ import androidx.fragment.app.DialogFragment
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import graduation.enesfaruk.runningtracker.R
 
-/**
- * Created by Enes Faruk Işık on 11.06.2022.
- */
 class CancelTrackingDialog : DialogFragment() {
 
     private var yesListener: (() -> Unit)? = null

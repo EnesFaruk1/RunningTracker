@@ -13,9 +13,6 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_settings.*
 import javax.inject.Inject
 
-/**
- * Created by Enes Faruk Işık on 26.03.2022.
- */
 
 @AndroidEntryPoint
 class SettingsFragment : Fragment(R.layout.fragment_settings) {

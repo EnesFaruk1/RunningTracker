@@ -17,10 +17,6 @@ import graduation.enesfaruk.runningtracker.other.Constants.RUNNING_DATABASE_NAME
 import graduation.enesfaruk.runningtracker.other.Constants.SHARED_PREFERENCES_NAME
 import javax.inject.Singleton
 
-/**
- * Created by Enes Faruk Işık on 26.03.2022.
- */
-
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {

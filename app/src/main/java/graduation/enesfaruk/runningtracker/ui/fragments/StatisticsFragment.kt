@@ -20,9 +20,6 @@ import graduation.enesfaruk.runningtracker.ui.viewmodels.StatisticsViewModel
 import kotlinx.android.synthetic.main.fragment_statistics.*
 import kotlin.math.round
 
-/**
- * Created by Enes Faruk Işık on 26.03.2022.
- */
 
 @AndroidEntryPoint
 class StatisticsFragment : Fragment(R.layout.fragment_statistics) {

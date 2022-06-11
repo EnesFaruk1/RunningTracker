@@ -41,10 +41,6 @@ import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
 
-/**
- * Created by Enes Faruk Işık on 1.04.2022.
- */
-
 typealias Polyline = MutableList<LatLng>
 typealias Polylines = MutableList<Polyline>
 

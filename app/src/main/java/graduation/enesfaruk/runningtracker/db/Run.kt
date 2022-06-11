@@ -4,9 +4,6 @@ import android.graphics.Bitmap
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-/**
- * Created by Enes Faruk Işık on 19.03.2022.
- */
 @Entity(tableName = "running_table")
 data class Run(
     var img: Bitmap? = null,

@@ -8,9 +8,6 @@ import graduation.enesfaruk.runningtracker.services.Polyline
 import pub.devrel.easypermissions.EasyPermissions
 import java.util.concurrent.TimeUnit
 
-/**
- * Created by Enes Faruk Işık on 1.04.2022.
- */
 object TrackingUtility {
 
     fun hasLocationPermissions(context: Context) =
