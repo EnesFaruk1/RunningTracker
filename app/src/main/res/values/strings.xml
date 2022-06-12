@@ -27,6 +27,7 @@
 
     <!-- Tracking Fragment -->
     <string name="tracking_timer">00:00:00:00</string>
+    <string name="tracking_distance">0 km</string>
     <string name="tracking_start">Start</string>
     <string name="tracking_finish">FINISH Run</string>
     <string name="tracking_lets_go">Let\'s go, USERNAME!</string>

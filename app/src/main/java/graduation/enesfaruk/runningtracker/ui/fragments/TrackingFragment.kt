@@ -1,8 +1,16 @@
 package graduation.enesfaruk.runningtracker.ui.fragments
 
+import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.*
+import android.widget.Toast
+import androidx.camera.core.CameraSelector
+import androidx.camera.core.Preview
+import androidx.camera.lifecycle.ProcessCameraProvider
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -11,7 +19,6 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.PolylineOptions
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import graduation.enesfaruk.runningtracker.R
@@ -22,11 +29,14 @@ import graduation.enesfaruk.runningtracker.other.Constants.ACTION_STOP_SERVICE
 import graduation.enesfaruk.runningtracker.other.Constants.MAP_ZOOM
 import graduation.enesfaruk.runningtracker.other.Constants.POLYLINE_COLOR
 import graduation.enesfaruk.runningtracker.other.Constants.POLYLINE_WIDTH
+import graduation.enesfaruk.runningtracker.other.Constants.REQUEST_PERMISSION_CODE
+import graduation.enesfaruk.runningtracker.other.Constants.REQUIRED_PERMISSIONS
 import graduation.enesfaruk.runningtracker.other.TrackingUtility
 import graduation.enesfaruk.runningtracker.services.Polyline
 import graduation.enesfaruk.runningtracker.services.TrackingService
 import graduation.enesfaruk.runningtracker.ui.viewmodels.MainViewModel
 import kotlinx.android.synthetic.main.fragment_tracking.*
+import timber.log.Timber
 import java.util.*
 import javax.inject.Inject
 import kotlin.math.round
@@ -40,15 +50,20 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking) {
 
     private var isTracking = false
     private var pathPoints = mutableListOf<Polyline>()
-
     private var map: GoogleMap? = null
-
     private var curTimeInMillis = 0L
-
     private var menu: Menu? = null
+    private var preview: Preview? = null
+
+    private lateinit var safeContext: Context
 
     @set:Inject
     var weight = 80f
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        safeContext = context
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -61,8 +76,13 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        if (allPermissionsGranted()) {
+            startCamera()
+            Toast.makeText(requireContext(),"true",Toast.LENGTH_SHORT).show()
+        } else {
+            ActivityCompat.requestPermissions(requireActivity(), REQUIRED_PERMISSIONS, REQUEST_PERMISSION_CODE)
+        }
         mapView.onCreate(savedInstanceState)
-
         btnToggleRun.setOnClickListener {
             toggleRun()
         }
@@ -86,6 +106,46 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking) {
         }
 
         subscribeToObservers()
+    }
+
+    private fun startCamera() {
+        val cameraProviderFuture = ProcessCameraProvider.getInstance(safeContext)
+        cameraProviderFuture.addListener(Runnable{
+            val cameraProvider: ProcessCameraProvider = cameraProviderFuture.get()
+            preview = Preview.Builder().build().also { mPreview ->
+                mPreview.setSurfaceProvider(
+                    viewFinder.surfaceProvider
+                )
+            }
+            val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
+
+            try {
+                cameraProvider.unbindAll()
+                cameraProvider.bindToLifecycle(
+                    viewLifecycleOwner, cameraSelector, preview
+                )
+            } catch (e: java.lang.Exception) {
+                Timber.d(e, "camera start fail")
+            }
+        }, ContextCompat.getMainExecutor(safeContext))
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        if (requestCode == REQUEST_PERMISSION_CODE){
+            if (allPermissionsGranted()){
+                startCamera()
+            } else {
+                Toast.makeText(requireContext(),"false",Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private fun allPermissionsGranted() = REQUIRED_PERMISSIONS.all {
+        ContextCompat.checkSelfPermission(safeContext, it) == PackageManager.PERMISSION_GRANTED
     }
 
     private fun subscribeToObservers() {

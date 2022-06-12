@@ -28,4 +28,8 @@ object Constants {
     const val NOTIFICATION_CHANNEL_ID = "tracking_channel"
     const val NOTIFICATION_CHANNEL_NAME = "Tracking"
     const val NOTIFICATION_ID = 1
+
+    const val TAG = "cameraX"
+    const val REQUEST_PERMISSION_CODE = 123
+    val REQUIRED_PERMISSIONS = arrayOf(android.Manifest.permission.CAMERA)
 }
