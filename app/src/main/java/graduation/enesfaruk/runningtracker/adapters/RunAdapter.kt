@@ -31,6 +31,10 @@ class RunAdapter: RecyclerView.Adapter<RunAdapter.RunViewHolder>() {
 
     val differ = AsyncListDiffer(this,diffCallback)
 
+    var runningItems: List<Run>
+        get() = differ.currentList
+        set(value) = differ.submitList(value)
+
     fun submitList(list: List<Run>) = differ.submitList(list)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RunViewHolder {

@@ -7,19 +7,25 @@ import android.view.View
 import android.widget.AdapterView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import dagger.hilt.android.AndroidEntryPoint
 import graduation.enesfaruk.runningtracker.R
 import graduation.enesfaruk.runningtracker.adapters.RunAdapter
+import graduation.enesfaruk.runningtracker.db.Run
 import graduation.enesfaruk.runningtracker.other.Constants.REQUEST_CODE_LOCATION_PERMISSION
 import graduation.enesfaruk.runningtracker.other.SortType
+import graduation.enesfaruk.runningtracker.other.SwipeToDeleteCallback
 import graduation.enesfaruk.runningtracker.other.TrackingUtility
 import graduation.enesfaruk.runningtracker.ui.viewmodels.MainViewModel
 import kotlinx.android.synthetic.main.fragment_run.*
 import pub.devrel.easypermissions.AppSettingsDialog
 import pub.devrel.easypermissions.EasyPermissions
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class RunFragment : Fragment(R.layout.fragment_run), EasyPermissions.PermissionCallbacks {
@@ -64,6 +70,18 @@ class RunFragment : Fragment(R.layout.fragment_run), EasyPermissions.PermissionC
         fab.setOnClickListener {
             findNavController().navigate(R.id.action_runFragment_to_trackingFragment)
         }
+
+        val swipeToDeleteCallback = object : SwipeToDeleteCallback() {
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val position = viewHolder.adapterPosition
+                val item = runAdapter.runningItems[position]
+                viewModel.deleteRun(item)
+                rvRuns.adapter?.notifyItemRemoved(position)
+            }
+        }
+
+        val itemTouchHelper = ItemTouchHelper(swipeToDeleteCallback)
+        itemTouchHelper.attachToRecyclerView(rvRuns)
     }
 
     private fun setupRecyclerView() = rvRuns.apply {
